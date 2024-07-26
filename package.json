@@ -1,40 +1,37 @@
 {
-  "name": "react-native-screenshot-prevent",
+  "name": "@react-native-oh-tpl/react-native-screenshot-prevent",
   "version": "1.2.1",
   "description": "This fork contains fully working blank screenshot on IOS13+ including screen recording",
   "main": "lib/module/index",
   "module": "lib/module/index",
-  "types": "./src/index.d.ts",
-  "react-native": "lib/module/index",
-  "source": "./src/index",
+  "types": "lib/typescript/index.d.ts",
+  "typings": "lib/typescript/index.d.ts",
+  "react-native": "./src/index.ts",
+  "source": "./src/index.ts",
   "files": [
     "src",
-    "lib",
-    "android",
-    "ios",
-    "cpp",
-    "*.podspec",
-    "!ios/build",
-    "!android/build",
-    "!android/gradle",
-    "!android/gradlew",
-    "!android/gradlew.bat",
-    "!android/local.properties",
-    "!**/__tests__",
-    "!**/__fixtures__",
-    "!**/__mocks__",
-    "!**/.*"
+    "harmony",
+    "lib"
   ],
   "scripts": {
     "test": "jest",
-    "typecheck": "tsc --noEmit",
-    "prepare": "bob build",
-    "lint": "eslint \"**/*.{js,ts,tsx}\""
+    "blob": "bob build",
+    "prepare": "npm run blob"
+  },
+  "publishConfig": { "registry": "https://registry.npmjs.org/", "access": "public" },
+  "harmony": {
+    "alias": "react-native-screenshot-prevent",
+   "codegenConfig": {
+      "specPaths": [
+        "./src"
+      ]
+    }
   },
   "keywords": [
     "react-native",
-    "ios",
-    "android"
+    "screenshot-prevent",
+    "android",
+    "harmony"
   ],
   "repository": "https://github.com/killserver/react-native-screenshot-prevent",
   "author": "killserver",
@@ -44,7 +41,7 @@
   },
   "homepage": "https://github.com/killserver/react-native-screenshot-prevent#readme",
   "devDependencies": {
-    "@react-native-community/bob": "^0.10.1",
+    "react-native-builder-bob": "^0.21.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@evilmartians/lefthook": "^1.2.2",
     "@react-native-community/eslint-config": "^3.0.2",
@@ -116,17 +113,17 @@
     "trailingComma": "es5",
     "useTabs": true
   },
-  "@react-native-community/bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "module",
-      "typescript"
-    ]
-  },
   "codegenConfig": {
     "name": "RNScreenshotPreventSpec",
     "type": "modules",
     "jsSrcsDir": "src"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module"
+    ]
   }
 }

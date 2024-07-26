@@ -1,0 +1,27 @@
+{
+  "module": {
+    "name": "react_native_screenshot_prevent",
+    "type": "har",
+    "description": "$string:module_desc",
+    "mainElement": "React_native_screenshot_preventAbility",
+    "deviceTypes": [
+      "default",
+      "2in1"
+    ],
+//    "deliveryWithInstall": true,
+//    "installationFree": false,
+//    "pages": "$profile:main_pages",
+//    "abilities": [
+//      {
+//        "name": "React_native_screenshot_preventAbility",
+//        "srcEntry": "./ets/react_native_screenshot_preventability/React_native_screenshot_preventAbility.ets",
+//        "description": "$string:React_native_screenshot_preventAbility_desc",
+//        "icon": "$media:layered_image",
+//        "label": "$string:React_native_screenshot_preventAbility_label",
+//        "startWindowIcon": "$media:startIcon",
+//        "startWindowBackground": "$color:start_window_background",
+//        "exported": true
+//      }
+//    ]
+  }
+}
