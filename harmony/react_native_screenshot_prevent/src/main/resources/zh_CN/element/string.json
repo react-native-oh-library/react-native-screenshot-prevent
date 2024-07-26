@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "React_native_screenshot_preventAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "React_native_screenshot_preventAbility_label",
+      "value": "label"
+    }
+  ]
+}

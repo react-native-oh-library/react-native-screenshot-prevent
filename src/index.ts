@@ -1,38 +1,76 @@
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform,DeviceEventEmitter} from 'react-native';
 import { useEffect } from 'react';
+import RNScreenshotPreventBackon from './NativeScreenShotPrevent';
 
 type FN = (resp: any) => void
 type Return = {
     readonly remove: () => void
 }
 let addListen: any, RNScreenshotPrevent: any;
+let flag:boolean=true;
 if (Platform.OS !== "web") {
-    const { RNScreenshotPrevent: RNScreenshotPreventNative } = NativeModules;
-    RNScreenshotPrevent = {
-        ...RNScreenshotPreventNative,
-        enableSecureView: function enableSecureView(imagePath: string = "") {
-            RNScreenshotPreventNative.enableSecureView(imagePath)
-        }
-    }
-    const eventEmitter = new NativeEventEmitter(RNScreenshotPrevent);
-
-    /**
-     * subscribes to userDidTakeScreenshot event
-     * @param {function} callback handler
-     * @returns {function} unsubscribe fn
-     */
-    addListen = (fn: FN): Return => {
-        if (typeof (fn) !== 'function') {
-            console.error('RNScreenshotPrevent: addListener requires valid callback function');
+    if(Platform.OS == "harmony"){
+        addListen = (fn: FN): Return => {
+            if (typeof (fn) !== 'function') {
+                throw new Error('RNScreenshotPrevent: addListener requires valid callback function');
+                return {
+                    remove: (): void => {
+                        throw new Error("RNScreenshotPrevent: remove not work because addListener requires valid callback function");
+                    }
+                };
+            }
+            if(flag){
+                DeviceEventEmitter.removeAllListeners();
+                DeviceEventEmitter.addListener('screenshot_did_happen',(data)=>{
+                    fn();
+                })
+                RNScreenshotPreventBackon?.addListener_bn();
+                flag=false;
+            }
             return {
                 remove: (): void => {
-                    console.error("RNScreenshotPrevent: remove not work because addListener requires valid callback function");
+                    RNScreenshotPreventBackon?.removeListener_bn();
+                    DeviceEventEmitter.removeAllListeners();
+                    flag=true;
                 }
-            };
+            }
         }
-
-        return eventEmitter.addListener("userDidTakeScreenshot", fn);
+        RNScreenshotPrevent = {
+            disableSecureView:RNScreenshotPreventBackon.disableSecureView_bn,
+            enabled:function enabled(enabled: boolean){
+                RNScreenshotPreventBackon?.enabled_bn(enabled)
+            },
+            addListener:addListen
+        }
+    }else{
+        const { RNScreenshotPrevent: RNScreenshotPreventNative } = NativeModules;
+        RNScreenshotPrevent = {
+            ...RNScreenshotPreventNative,
+            enableSecureView: function enableSecureView(imagePath: string = "") {
+                RNScreenshotPreventNative.enableSecureView(imagePath)
+            }
+        }
+        const eventEmitter = new NativeEventEmitter(RNScreenshotPrevent);
+    
+        /**
+         * subscribes to userDidTakeScreenshot event
+         * @param {function} callback handler
+         * @returns {function} unsubscribe fn
+         */
+        addListen = (fn: FN): Return => {
+            if (typeof (fn) !== 'function') {
+                console.error('RNScreenshotPrevent: addListener requires valid callback function');
+                return {
+                    remove: (): void => {
+                        console.error("RNScreenshotPrevent: remove not work because addListener requires valid callback function");
+                    }
+                };
+            }
+    
+            return eventEmitter.addListener("userDidTakeScreenshot", fn);
+        }
     }
+    
 } else {
     RNScreenshotPrevent = {
         enabled: (enabled: boolean): void => {
@@ -81,8 +119,10 @@ export const useDisableSecureView = (imagePath: string = "") => {
     }, []);
 }
 
+
 export const enabled: (enabled: boolean) => void = RNScreenshotPrevent.enabled
 export const enableSecureView: (imagePath?: string) => void = RNScreenshotPrevent.enableSecureView
-export const disableSecureView: () => void = RNScreenshotPrevent.disableSecureView
-export const addListener: (fn: FN) => void = addListen
+export const disableSecureView: () => string = RNScreenshotPrevent.disableSecureView
+export const addListener: (fn: FN) => Object = addListen
+
 export default RNScreenshotPrevent;

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "react_native_screenshot_prevent_test",
+    "type": "feature",
+    "deviceTypes": [
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

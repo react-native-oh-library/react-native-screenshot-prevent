@@ -1,0 +1,12 @@
+{
+  "name": "react_native_screenshot_prevent",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@rnoh/react-native-openharmony": 'file:../react_native_openharmony'
+  }
+}
+
