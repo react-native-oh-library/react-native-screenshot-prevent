@@ -1,12 +1,11 @@
 {
-  "name": "react_native_screenshot_prevent",
+  "name": "@react-native-oh-tpl/react-native-screenshot-prevent",
   "version": "1.2.1-0.0.1",
   "description": "Please describe the basic information.",
-  "main": "",
+  "main": "Index.ets",
   "author": "",
-  "license": "",
+  "license": "Apache-2.0",
   "dependencies": {
-    "@rnoh/react-native-openharmony": 'file:../react_native_openharmony'
+    "@rnoh/react-native-openharmony": 'file:../libs/react_native_openharmony-5.0.0.500.har'
   }
 }
-
