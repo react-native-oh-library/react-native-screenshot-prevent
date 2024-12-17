@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-screenshot-prevent",
+        "License": "MIT License",
+        "License File": "https://github.com/killserver/react-native-screenshot-prevent/blob/main/LICENSE",
+        "Version Number": "1.2.1",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/killserver/react-native-screenshot-prevent",
+        "Description": "native screenshot prevent library for react-native"
+    }
+]
